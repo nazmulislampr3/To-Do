@@ -3,7 +3,7 @@ import { TaskToAdd } from "../../types";
 import { useTaskContext } from "../../context/TaskContext";
 import cn from "../../lib/utils/cn";
 
-const AddTodo = () => {
+const AddTask = () => {
   const {
     editTaskId,
     tasks,
@@ -74,7 +74,6 @@ const AddTodo = () => {
     });
   };
 
-  console.log(task);
   return (
     <div className="w-full max-w-2xl flex flex-col gap-1 items-center">
       <div className="flex w-full jusity-center items-center flex-col">
@@ -89,8 +88,9 @@ const AddTodo = () => {
         />
       </div>
       <div className="flex flex-wrap gap-1 justify-center">
-        {tags.map((tag) => (
+        {tags.map((tag, index) => (
           <button
+            key={index}
             className={cn(
               "px-3 lg:px-4 py-1.5 bg-slate-500 font-semibold text-slate-200 border-4 text-xs lg:text-sm border-transparent rounded-sm",
               {
@@ -139,7 +139,7 @@ const AddTodo = () => {
           <button
             className="btn1 bg-green-500"
             onClick={() => {
-              updateTask(editTaskId, task);
+              updateTask(editTaskId, { ...task, date: new Date() });
               setEditTaskId(null);
             }}
           >
@@ -151,4 +151,4 @@ const AddTodo = () => {
   );
 };
 
-export default AddTodo;
+export default AddTask;
