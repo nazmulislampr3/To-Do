@@ -61,6 +61,20 @@ const AddTodo = () => {
   const handleChange = ({ target: { name, value } }: any) => {
     setTask((prev) => ({ ...prev, [name]: value }));
   };
+
+  const toggleTag = (tag: string) => {
+    setTask((prev) => {
+      let tags = [...prev.tags];
+      if (tags.includes(tag)) {
+        tags = tags.filter((item) => item !== tag);
+      } else {
+        tags = [...prev.tags, tag];
+      }
+      return { ...prev, tags };
+    });
+  };
+
+  console.log(task);
   return (
     <div className="w-full max-w-2xl flex flex-col gap-1 items-center">
       <div className="flex w-full jusity-center items-center flex-col">
@@ -83,17 +97,7 @@ const AddTodo = () => {
                 "border-green-500": task.tags.includes(tag),
               }
             )}
-            onClick={() =>
-              setTask((prev) => {
-                let tags = [...prev.tags];
-                if (tags.includes(tag)) {
-                  tags = tags.filter((item) => item !== tag);
-                } else {
-                  tags = [...prev.tags, tag];
-                }
-                return { ...prev, tags };
-              })
-            }
+            onClick={() => toggleTag(tag)}
           >
             {tag}
           </button>

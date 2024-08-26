@@ -26,7 +26,7 @@ const TaskContextProvider = ({ children }: { children: ReactNode }) => {
     ]);
   };
 
-  const editTask: EditTask = (id, { date, status, title }) => {
+  const editTask: EditTask = (id, { date, status, title, tags }) => {
     setTasks((prev) => {
       const copy = [...prev];
       const findTask = copy.find(({ id: taskId }) => taskId === id);
@@ -34,6 +34,7 @@ const TaskContextProvider = ({ children }: { children: ReactNode }) => {
         findTask.title = title;
         findTask.status = status;
         findTask.date = date;
+        findTask.tags = tags;
       }
 
       return copy;
